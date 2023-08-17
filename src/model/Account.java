@@ -1,13 +1,15 @@
 package model;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable{
     private int numberAccount;
     private double balance;
     private short password;
 
-    public Account(int numberAccount, short password) {
+    public Account(int numberAccount,double  balance,short password) {
         this.numberAccount = numberAccount;
-        this.balance = 0.0;
+        this.balance = balance;
         this.password = password;
     }
 

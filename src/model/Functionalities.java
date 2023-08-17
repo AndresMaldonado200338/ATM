@@ -7,6 +7,10 @@ public class Functionalities {
     public Functionalities(Account account) {
         this.account = account;
     }
+    public void Consultation(){
+        
+        System.out.println("Your balance is: " + account.getBalance());
+    }
 
     
 
