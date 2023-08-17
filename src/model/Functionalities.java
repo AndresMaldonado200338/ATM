@@ -3,16 +3,21 @@ package model;
 public class Functionalities {
 
     private Account account;
+    private BDmanager bDmanager;
 
-    public Functionalities(Account account) {
-        this.account = account;
-    }
-    public void Consultation(){
-        
-        System.out.println("Your balance is: " + account.getBalance());
+    public Functionalities(int numberAccount, short password) {
+        this.account = new Account();
+        bDmanager = new BDmanager();
     }
 
-    
+    public boolean verify() {
+        return true;
+    }
 
-    
+    public void Consultation() {
+        if (verify() == true) {
+            System.out.println("Su saldo es: " + account.getBalance());
+        }
+    }
+
 }

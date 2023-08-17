@@ -13,6 +13,9 @@ public class Account implements Serializable{
         this.password = password;
     }
 
+    public Account() {
+    }
+
     public int getNumberAccount() {
         return numberAccount;
     }
