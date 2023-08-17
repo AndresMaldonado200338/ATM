@@ -1,8 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class Account implements Serializable{
+public class Account{
     private int numberAccount;
     private double balance;
     private short password;

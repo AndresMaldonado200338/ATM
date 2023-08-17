@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public class Functionalities {
 
     private Account account;
@@ -11,12 +13,18 @@ public class Functionalities {
     }
 
     public boolean verify() {
-        return true;
+        List<Account> accounts = bDmanager.readAccounts();
+        for(Account account : accounts){
+            if(account.getNumberAccount() == this.account.getNumberAccount() && account.getPassword() == this.account.getPassword()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void Consultation() {
         if (verify() == true) {
-            System.out.println("Su saldo es: " + account.getBalance());
+          
         }
     }
 
