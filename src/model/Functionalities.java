@@ -5,45 +5,15 @@ import java.util.List;
 public class Functionalities {
     private Account account;
     private BDmanager bDmanager;
-    private int numberAccount;
+    private long numberAccount;
     private short password;
 
-    public Functionalities(int numberAccount, short password) {
+    public Functionalities(long numberAccount, short password) {
         this.account = new Account();
         this.bDmanager = new BDmanager();
         this.numberAccount = numberAccount;
         this.password = password;
         verify();
-    }
-
-    /**
-     * Metodo para verificar la cuenta
-     * 
-     * @return
-     */
-    public boolean verify() {
-        List<Account> accounts = bDmanager.readAccounts();
-        for (Account account : accounts) {
-            if (account.getNumberAccount() == this.account.getNumberAccount()
-                    && account.getPassword() == this.account.getPassword()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo para consultar el saldo
-     */
-    public void Consultation() {
-        if (verify() == true) {
-            List<Account> accounts = bDmanager.readAccounts();
-            for (Account account : accounts) {
-                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
-                    System.out.println("Su saldo es: " + account.getBalance());
-                }
-            }
-        }
     }
 
     /**
@@ -80,6 +50,22 @@ public class Functionalities {
                 }
             }
         }
+    }
+
+    /**
+     * Metodo para verificar la cuenta
+     * 
+     * @return true si la cuenta es valida o false si no lo es
+     */
+    public boolean verify() {
+        List<Account> accounts = bDmanager.readAccounts();
+        for (Account account : accounts) {
+            if (account.getNumberAccount() == this.account.getNumberAccount()
+                    && account.getPassword() == this.account.getPassword()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -124,6 +110,20 @@ public class Functionalities {
                         bDmanager.editAccount(numberAccount, finalBalance);
                         System.out.println("Su nuevo saldo es: " + account.getBalance());
                     }
+                }
+            }
+        }
+    }
+
+    /**
+     * Metodo para consultar el saldo
+     */
+    public void Consultation() {
+        if (verify() == true) {
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    System.out.println("Su saldo es: " + account.getBalance());
                 }
             }
         }

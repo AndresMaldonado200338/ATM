@@ -45,7 +45,7 @@ public class BDmanager {
     }
 
     // metodo para editar cuenta
-    public void editAccount(int accountNumber, double newBalance) {
+    public void editAccount(long accountNumber, double newBalance) {
         List<Account> accounts = readAccounts();
         for (Account account : accounts) {
             if (account.getNumberAccount() == accountNumber) {
