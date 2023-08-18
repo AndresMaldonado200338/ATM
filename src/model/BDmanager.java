@@ -38,7 +38,7 @@ public class BDmanager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                long numberAccount = Integer.parseInt(parts[0]);
+                long numberAccount = Long.parseLong(parts[0]);
                 double balance = Double.parseDouble(parts[1]);
                 short password = Short.parseShort(parts[2]);
                 double refund = Double.parseDouble(parts[4]);

@@ -1,5 +1,6 @@
 package presenter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.*;
@@ -16,7 +17,7 @@ public class Presenter {
     public Presenter() {
         this.viewManager = new ViewManager();
         this.bDmanager = new BDmanager();
-        this.accounts = bDmanager.readAccounts();
+        this.accounts = new ArrayList<>();
     }
 
     /**
@@ -55,8 +56,8 @@ public class Presenter {
         long numberAccount = viewManager.readGraphicLong(Constants.ACCOUNT_NUMBER);
         double balance = viewManager.readGraphicDouble(Constants.ACCOUNT_BALANCE);
         short password = viewManager.readGraphicShort(Constants.ACCOUNT_PASSWORD);
-        accountOperations.createAccount(numberAccount, balance, password, accounts);
-        bDmanager.saveAccounts(accounts);
+        accountOperations.createAccount(numberAccount, balance, password, this.accounts);
+        bDmanager.saveAccounts(this.accounts);
         viewManager.showGraphicMessage("Cuenta creada con exito");
     }
 
@@ -82,6 +83,7 @@ public class Presenter {
 
     public static void main(String[] args) {
         Presenter presenter = new Presenter();
+        presenter.accounts.add(0, new Account(123456789012L, 100000, (short) 1234, 0));
         presenter.init();
     }
 }
