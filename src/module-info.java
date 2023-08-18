@@ -6,4 +6,5 @@
  *
  */
 module ATM_Project {
+	requires java.desktop;
 }

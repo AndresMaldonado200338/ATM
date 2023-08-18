@@ -15,7 +15,11 @@ public class Functionalities {
         this.password = password;
         verify();
     }
-//metodo para validar cuenta
+
+    /**
+     * Metodo para verificar la cuenta
+     * @return
+     */
     public boolean verify() {
         List<Account> accounts = bDmanager.readAccounts();
         for (Account account : accounts) {
@@ -26,7 +30,10 @@ public class Functionalities {
         }
         return false;
     }
-//metodo para consultar estado de cuenta
+
+    /**
+     * Metodo para consultar el saldo
+     */
     public void Consultation() {
         if (verify() == true) {
             List<Account> accounts = bDmanager.readAccounts();
@@ -38,6 +45,10 @@ public class Functionalities {
         }
     }
 
+    /**
+     * Metodo para retirar dinero
+     * @param newBalance
+     */
     public void retreats(double newBalance){
         if (verify() == true){
             List<Account> accounts = bDmanager.readAccounts();
@@ -51,6 +62,10 @@ public class Functionalities {
         }
     }
 
+    /**
+     * Metodo para consignar dinero
+     * @param newBalance
+     */
     public void consiganations(double newBalance){
         if (verify() == true){
             List<Account> accounts = bDmanager.readAccounts();
@@ -64,6 +79,11 @@ public class Functionalities {
         }
     }
 
+    /**
+     * Metodo para calcular el avance
+     * @param balance
+     * @return
+     */
     private double calculateAdvance(double balance) {
         double auxAdvance = 0;
         if (balance != 0) {
@@ -72,11 +92,21 @@ public class Functionalities {
         return auxAdvance;
     }
 
+    /**
+     * Metodo para calcular el reembolso
+     * @param advance
+     * @return
+     */
     public double calculateRefund(double advance) {
         double auxRefund;
         return auxRefund = advance * 0.08 * 1.5;
     }
 
+    /**
+     * Metodo para calcular el avance
+     * @param balance
+     * @param advance
+     */
     public void advance(double balance, double advance) {
         double maxAdvance = balance * 1.5;
         double auxAdvance = calculateAdvance(balance);
@@ -84,5 +114,4 @@ public class Functionalities {
             double aux = account.getBalance() + auxAdvance;
         }
     }
-
 }
