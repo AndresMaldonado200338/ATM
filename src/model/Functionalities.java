@@ -56,6 +56,7 @@ public class Functionalities {
             List<Account> accounts = bDmanager.readAccounts();
             for (Account account : accounts) {
                 if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    account.getMovements().add("Retiro: " + newBalance);
                     double finalBalance = account.getBalance() - newBalance;
                     bDmanager.editAccount(numberAccount, finalBalance);
                     System.out.println("Su nuevo saldo es: " + account.getBalance());
@@ -74,6 +75,7 @@ public class Functionalities {
             List<Account> accounts = bDmanager.readAccounts();
             for (Account account : accounts) {
                 if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    account.getMovements().add("Consignacion: " + newBalance);
                     double finalBalance = account.getBalance() + newBalance;
                     bDmanager.editAccount(numberAccount, finalBalance);
                     System.out.println("Su nuevo saldo es: " + account.getBalance());
@@ -120,9 +122,22 @@ public class Functionalities {
             for (Account account : accounts) {
                 if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
                     if (balance > 0 && auxAdvance < balance && auxAdvance <= maxAdvance) {
+                        account.getMovements().add("Avance: " + auxAdvance);
                         double finalBalance = account.getBalance() + auxAdvance;
                         bDmanager.editAccount(numberAccount, finalBalance);
                         System.out.println("Su nuevo saldo es: " + account.getBalance());
+                    }
+                }
+            }
+        }
+    }
+    public void showMovements() {
+        if (verify() == true) {
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    for (String movement : account.getMovements()) {
+                        System.out.println(movement);
                     }
                 }
             }
