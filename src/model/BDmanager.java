@@ -10,21 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BDmanager {
-    // nombre del archivo Txt
+
+    /**
+     * Metodo para guardar cuentas en un archivo de texto
+     */
     private static final String FILENAME = "ATM_Project\\src\\resources\\Account.txt";
 
     // metodo para guardar cuentas
     public void saveAccounts(List<Account> accounts) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILENAME))) {
             for (Account account : accounts) {
-                writer.println(account.getNumberAccount() + "," + account.getBalance() + "," + account.getPassword()+ "," + account.getCredit()+ "," + account.getRefund());
+                writer.println(account.getNumberAccount() + "," + account.getBalance() + "," + account.getPassword()
+                        + "," + account.getCredit() + "," + account.getRefund());
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // metodo para leer cuentas
+    /**
+     * Metodo para leer cuentas de un archivo de texto y pasarlas a una lista
+     * @return lista con la cuenta
+     */
     public List<Account> readAccounts() {
         List<Account> accounts = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
@@ -44,7 +51,11 @@ public class BDmanager {
         return accounts;
     }
 
-    // metodo para editar cuenta
+    /**
+     * Metodo para editar una cuenta de la lista
+     * @param accountNumber
+     * @param newBalance
+     */
     public void editAccount(long accountNumber, double newBalance) {
         List<Account> accounts = readAccounts();
         for (Account account : accounts) {
@@ -56,28 +67,19 @@ public class BDmanager {
         saveAccounts(accounts);
     }
 
-    // metodo para eliminar cuenta
-    public void deleteAccount(int accountNumber) {
-        List<Account> accounts = readAccounts();
-        accounts.removeIf(account -> account.getNumberAccount() == accountNumber);
-        saveAccounts(accounts);
-    }
-  
-      public static void main(String[] args) {
-      BDmanager bDmanager = new BDmanager();
+    public static void main(String[] args) {
+        BDmanager bDmanager = new BDmanager();
         // Create accounts
-        Account account1 = new Account((long)1, 1000.0, (short) 1234, 0.0);
-        Account account2 = new Account((long)2, 2000.0, (short) 5678, 0.0);
+        Account account1 = new Account((long) 1, 1000.0, (short) 1234, 0.0);
+        Account account2 = new Account((long) 2, 2000.0, (short) 5678, 0.0);
 
-      // Save accounts
-      List<Account> accounts = new ArrayList<>();
-      accounts.add(account1);
-      accounts.add(account2);
-      bDmanager.saveAccounts(accounts);
-      // Edit and delete accounts
-      bDmanager.editAccount(1, 1500.0);
-      bDmanager.deleteAccount(2);
-      }
-     
+        // Save accounts
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(account1);
+        accounts.add(account2);
+        bDmanager.saveAccounts(accounts);
+        // Edit and delete accounts
+        bDmanager.editAccount(1, 1500.0);
+    }
 
 }
