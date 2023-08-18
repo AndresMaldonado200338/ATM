@@ -3,28 +3,34 @@ package model;
 import java.util.List;
 
 public class Functionalities {
-
-    private Account account;
     private BDmanager bDmanager;
-
+    private int numberAccount;
+    private short password;
     public Functionalities(int numberAccount, short password) {
-        this.account = new Account();
         bDmanager = new BDmanager();
+        this.numberAccount = numberAccount;
+        this.password = password;
+        verify();
     }
 
     public boolean verify() {
         List<Account> accounts = bDmanager.readAccounts();
         for(Account account : accounts){
-            if(account.getNumberAccount() == this.account.getNumberAccount() && account.getPassword() == this.account.getPassword()){
+            if(account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password){
                 return true;
             }
         }
         return false;
     }
-
     public void Consultation() {
         if (verify() == true) {
-          
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    System.out.println("Su saldo es: " + account.getBalance());
+                }
+            }
+
         }
     }
 
