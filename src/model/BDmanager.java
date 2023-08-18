@@ -17,7 +17,7 @@ public class BDmanager {
     public void saveAccounts(List<Account> accounts) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILENAME))) {
             for (Account account : accounts) {
-                writer.println(account.getNumberAccount() + "," + account.getBalance() + "," + account.getPassword());
+                writer.println(account.getNumberAccount() + "," + account.getBalance() + "," + account.getPassword()+ "," + account.getCredit()+ "," + account.getRefund());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,7 +34,11 @@ public class BDmanager {
                 int numberAccount = Integer.parseInt(parts[0]);
                 double balance = Double.parseDouble(parts[1]);
                 short password = Short.parseShort(parts[2]);
+                double credit = Double.parseDouble(parts[3]);
+                double refund = Double.parseDouble(parts[4]);
                 Account account = new Account(numberAccount, balance, password);
+                account.setCredit(credit);
+                account.setRefund(refund);
                 accounts.add(account);
             }
         } catch (IOException e) {
@@ -61,20 +65,20 @@ public class BDmanager {
         accounts.removeIf(account -> account.getNumberAccount() == accountNumber);
         saveAccounts(accounts);
     }
-    /*
-     * public static void main(String[] args) {
-     * BDmanager bDmanager = new BDmanager();
-     * Account account1 = new Account(1, 1000.0, (short) 1234);
-     * Account account2 = new Account(2, 2000.0, (short) 5678);
-     * // Save accounts
-     * List<Account> accounts = new ArrayList<>();
-     * accounts.add(account1);
-     * accounts.add(account2);
-     * bDmanager.saveAccounts(accounts);
-     * // Edit and delete accounts
-     * bDmanager.editAccount(1, 1500.0);
-     * bDmanager.deleteAccount(2);
-     * }
-     */
+  
+      public static void main(String[] args) {
+      BDmanager bDmanager = new BDmanager();
+      Account account1 = new Account(1, 1000.0, (short) 1234);
+      Account account2 = new Account(2, 2000.0, (short) 5678);
+      // Save accounts
+      List<Account> accounts = new ArrayList<>();
+      accounts.add(account1);
+      accounts.add(account2);
+      bDmanager.saveAccounts(accounts);
+      // Edit and delete accounts
+      bDmanager.editAccount(1, 1500.0);
+      bDmanager.deleteAccount(2);
+      }
+     
 
 }

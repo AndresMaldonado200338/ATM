@@ -15,7 +15,7 @@ public class Functionalities {
         this.password = password;
         verify();
     }
-
+//metodo para validar cuenta
     public boolean verify() {
         List<Account> accounts = bDmanager.readAccounts();
         for (Account account : accounts) {
@@ -26,7 +26,7 @@ public class Functionalities {
         }
         return false;
     }
-
+//metodo para consultar estado de cuenta
     public void Consultation() {
         if (verify() == true) {
             List<Account> accounts = bDmanager.readAccounts();
