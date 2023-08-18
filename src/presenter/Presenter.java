@@ -110,6 +110,9 @@ public class Presenter {
                     case 3:
                         viewManager.showGraphicMessage("Finalizacion");
                         break;
+                    case 7:
+                        viewManager.showGraphicMessage("Finalizacion");
+                        break;
                     default:
                         viewManager.showGraphicMessage("Opcion invalida");
                         break;
@@ -127,16 +130,18 @@ public class Presenter {
      * @param password
      */
     public void retreats(long numberAccount, short password) {
-        double newBalance = viewManager.readGraphicDouble(Constants.ACCOUNT_BALANCE);
+        double newBalance = viewManager.readGraphicDouble(Constants.RETREAT);
         if (functionalities.verify() == true) {
             List<Account> accounts = bDmanager.readAccounts();
             for (Account account : accounts) {
                 if (account.getNumberAccount() == numberAccount && account.getPassword() == password) {
                     double finalBalance = account.getBalance() - newBalance;
                     bDmanager.editAccount(numberAccount, finalBalance);
+                    viewManager.showGraphicMessage("Retiro Existoso");
                     viewManager.showGraphicMessage("Su nuevo saldo es: " + account.getBalance());
                 }
             }
+            System.out.println("XD");
         }
         menu(numberAccount, password);
     }
