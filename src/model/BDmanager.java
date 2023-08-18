@@ -36,9 +36,7 @@ public class BDmanager {
                 short password = Short.parseShort(parts[2]);
                 double credit = Double.parseDouble(parts[3]);
                 double refund = Double.parseDouble(parts[4]);
-                Account account = new Account(numberAccount, balance, password);
-                account.setCredit(credit);
-                account.setRefund(refund);
+                Account account = new Account(numberAccount, balance, password, credit, refund);
                 accounts.add(account);
             }
         } catch (IOException e) {
@@ -65,11 +63,11 @@ public class BDmanager {
         accounts.removeIf(account -> account.getNumberAccount() == accountNumber);
         saveAccounts(accounts);
     }
-  
+  /*
       public static void main(String[] args) {
       BDmanager bDmanager = new BDmanager();
-      Account account1 = new Account(1L, 1000.0, (short) 1234);
-      Account account2 = new Account(2L, 2000.0, (short) 5678);
+      Account account1 = new Account(1L, 1000.0, (short) 1234, 1000.0, 1000.0);
+      Account account2 = new Account(2L, 2000.0, (short) 5678, 2000.0, 2000.0);
       // Save accounts
       List<Account> accounts = new ArrayList<>();
       accounts.add(account1);
@@ -79,6 +77,6 @@ public class BDmanager {
       bDmanager.editAccount(1, 1500.0);
       bDmanager.deleteAccount(2);
       }
-     
+     */
 
 }

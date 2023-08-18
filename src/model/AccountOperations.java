@@ -14,9 +14,9 @@ public class AccountOperations {
      * @param password
      * @param accounts
      */
-    public void createAccount(long numberAccount, double balance, short password) {
+    public void createAccount(long numberAccount, double balance, short password, double credit, double refund) {
         if (validateNumberAccount(numberAccount) == true && validatePassword(password) == true) {
-            account = new Account(numberAccount, balance, password);
+            account = new Account(numberAccount, balance, password, credit, refund);
             bDmanager = new BDmanager();
             List<Account> accounts = bDmanager.readAccounts();
             accounts.add(account);

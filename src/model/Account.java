@@ -7,10 +7,12 @@ public class Account {
     private double credit;
     private double refund;
 
-    public Account(Long numberAccount, double balance, short password) {
+    public Account(Long numberAccount, double balance, short password, double credit, double refund) {
         this.numberAccount = numberAccount;
         this.balance = balance;
         this.password = password;
+        this.credit = credit;
+        this.refund = refund;
     }
 
     public Account() {
