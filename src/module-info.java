@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author andre
+ * @authors Andrés Maldonado, Nicolás Peña, Nicolás Pirazán
  *
  */
 module ATM_Project {

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BDmanager {
     // nombre del archivo Txt
-    private static final String FILENAME = "src\\resources\\Account.txt";
+    private static final String FILENAME = "ATM_Project\\src\\resources\\Account.txt";
 
     // metodo para guardar cuentas
     public void saveAccounts(List<Account> accounts) {
@@ -31,7 +31,7 @@ public class BDmanager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                int numberAccount = Integer.parseInt(parts[0]);
+                long numberAccount = Integer.parseInt(parts[0]);
                 double balance = Double.parseDouble(parts[1]);
                 short password = Short.parseShort(parts[2]);
                 double credit = Double.parseDouble(parts[3]);
@@ -68,8 +68,8 @@ public class BDmanager {
   
       public static void main(String[] args) {
       BDmanager bDmanager = new BDmanager();
-      Account account1 = new Account(1, 1000.0, (short) 1234);
-      Account account2 = new Account(2, 2000.0, (short) 5678);
+      Account account1 = new Account(1L, 1000.0, (short) 1234);
+      Account account2 = new Account(2L, 2000.0, (short) 5678);
       // Save accounts
       List<Account> accounts = new ArrayList<>();
       accounts.add(account1);

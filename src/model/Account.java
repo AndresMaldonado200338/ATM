@@ -1,13 +1,13 @@
 package model;
 
-public class Account{
-    private int numberAccount;
+public class Account {
+    private long numberAccount;
     private double balance;
     private short password;
     private double credit;
     private double refund;
 
-    public Account(int numberAccount,double  balance,short password) {
+    public Account(Long numberAccount, double balance, short password) {
         this.numberAccount = numberAccount;
         this.balance = balance;
         this.password = password;
@@ -16,7 +16,7 @@ public class Account{
     public Account() {
     }
 
-    public int getNumberAccount() {
+    public long getNumberAccount() {
         return numberAccount;
     }
 
@@ -40,22 +40,19 @@ public class Account{
         this.password = password;
     }
 
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
     public double getCredit() {
         return credit;
     }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
+    public void setRefund(double refund) {
+        this.refund = refund;
     }
 
     public double getRefund() {
         return refund;
     }
-
-    public void setRefund(double refund) {
-        refund = refund;
-    }
-
-    
-
 }

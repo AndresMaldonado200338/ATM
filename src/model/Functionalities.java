@@ -38,6 +38,32 @@ public class Functionalities {
         }
     }
 
+    public void retreats(double newBalance){
+        if (verify() == true){
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    double finalBalance = account.getBalance()-newBalance;
+                    bDmanager.editAccount(numberAccount, finalBalance);
+                    System.out.println("Su nuevo saldo es: " + account.getBalance());
+                }
+            }
+        }
+    }
+
+    public void consiganations(double newBalance){
+        if (verify() == true){
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
+                    double finalBalance = account.getBalance()+newBalance;
+                    bDmanager.editAccount(numberAccount, finalBalance);
+                    System.out.println("Su nuevo saldo es: " + account.getBalance());
+                }
+            }
+        }
+    }
+
     private double calculateAdvance(double balance) {
         double auxAdvance = 0;
         if (balance != 0) {
