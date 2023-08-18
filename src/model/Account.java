@@ -4,6 +4,8 @@ public class Account {
     private int numberAccount;
     private double balance;
     private short password;
+    private double credit;
+    private double refund;
 
     public Account(int numberAccount, short password) {
         this.numberAccount = numberAccount;
@@ -34,5 +36,23 @@ public class Account {
     public void setPassword(short password) {
         this.password = password;
     }
+
+    public double getCredit() {
+        return credit;
+    }
+
+    public void setCredit(double credit) {
+        this.credit = credit;
+    }
+
+    public double getRefund() {
+        return refund;
+    }
+
+    public void setRefund(double refund) {
+        refund = refund;
+    }
+
+    
 
 }
