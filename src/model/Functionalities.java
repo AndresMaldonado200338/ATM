@@ -16,6 +16,12 @@ public class Functionalities {
         verify();
     }
 
+    public Functionalities() {
+        this.account = new Account();
+        this.bDmanager = new BDmanager();
+        verify();
+    }
+
     /**
      * Metodo para retirar dinero
      * 

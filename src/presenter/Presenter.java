@@ -15,9 +15,11 @@ public class Presenter {
     private List<Account> accounts;
 
     public Presenter() {
+        this.functionalities = new Functionalities();
         this.viewManager = new ViewManager();
         this.bDmanager = new BDmanager();
         this.accounts = new ArrayList<>();
+        this.accountOperations = new AccountOperations();
     }
 
     /**
@@ -57,8 +59,24 @@ public class Presenter {
         double balance = viewManager.readGraphicDouble(Constants.ACCOUNT_BALANCE);
         short password = viewManager.readGraphicShort(Constants.ACCOUNT_PASSWORD);
         accountOperations.createAccount(numberAccount, balance, password, this.accounts);
-        bDmanager.saveAccounts(this.accounts);
-        viewManager.showGraphicMessage("Cuenta creada con exito");
+        for (Account account : accounts) {
+            if (account.getNumberAccount() == numberAccount) {
+                viewManager.showGraphicMessage("Numero de cuenta existente");
+                init();
+            } else {
+                if (accountOperations.validateNumberAccount(numberAccount) == false) {
+                    viewManager.showGraphicMessage("Numero de cuenta invalido");
+                    init();
+                } else if (accountOperations.validatePassword(password) == false) {
+                    viewManager.showGraphicMessage("Contraseña invalida");
+                    init();
+                } else {
+                    bDmanager.saveAccounts(accounts);
+                    viewManager.showGraphicMessage("Cuenta creada con exito");
+                    init();
+                }
+            }
+        }
     }
 
     /**
@@ -78,7 +96,70 @@ public class Presenter {
     }
 
     public void menu(long numberAccount, short password) {
+        int op = 0;
+        do {
+            try {
+                op = viewManager.readGraphicShort(Constants.MENU2);
+                switch (op) {
+                    case 1:
+                        retreats(numberAccount, password);
+                        break;
+                    case 2:
+                        consiganations(numberAccount, password);
+                        break;
+                    case 3:
+                        viewManager.showGraphicMessage("Finalizacion");
+                        break;
+                    default:
+                        viewManager.showGraphicMessage("Opcion invalida");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                viewManager.showGraphicMessage("Error: " + e.getMessage());
+            }
+        } while (op != 3);
+    }
 
+    /**
+     * Metodo para retirar dinero
+     * 
+     * @param numberAccount
+     * @param password
+     */
+    public void retreats(long numberAccount, short password) {
+        double newBalance = viewManager.readGraphicDouble(Constants.ACCOUNT_BALANCE);
+        if (functionalities.verify() == true) {
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == numberAccount && account.getPassword() == password) {
+                    double finalBalance = account.getBalance() - newBalance;
+                    bDmanager.editAccount(numberAccount, finalBalance);
+                    viewManager.showGraphicMessage("Su nuevo saldo es: " + account.getBalance());
+                }
+            }
+        }
+        menu(numberAccount, password);
+    }
+
+    /**
+     * Metodo para consignar dinero
+     * 
+     * @param numberAccount
+     * @param password
+     */
+    public void consiganations(long numberAccount, short password) {
+        double newBalance = viewManager.readGraphicDouble(Constants.ACCOUNT_BALANCE);
+        if (functionalities.verify() == true) {
+            List<Account> accounts = bDmanager.readAccounts();
+            for (Account account : accounts) {
+                if (account.getNumberAccount() == numberAccount && account.getPassword() == password) {
+                    double finalBalance = account.getBalance() + newBalance;
+                    bDmanager.editAccount(numberAccount, finalBalance);
+                    viewManager.showGraphicMessage("Su nuevo saldo es: " + account.getBalance());
+                }
+            }
+        }
+        menu(numberAccount, password);
     }
 
     public static void main(String[] args) {
