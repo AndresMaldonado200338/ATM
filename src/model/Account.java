@@ -1,16 +1,19 @@
 package model;
 
-public class Account {
+public class Account{
     private int numberAccount;
     private double balance;
     private short password;
     private double credit;
     private double refund;
 
-    public Account(int numberAccount, short password) {
+    public Account(int numberAccount,double  balance,short password) {
         this.numberAccount = numberAccount;
-        this.balance = 0.0;
+        this.balance = balance;
         this.password = password;
+    }
+
+    public Account() {
     }
 
     public int getNumberAccount() {
