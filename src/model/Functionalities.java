@@ -18,7 +18,6 @@ public class Functionalities {
 
     /**
      * Metodo para verificar la cuenta
-     * 
      * @return
      */
     public boolean verify() {
@@ -48,15 +47,14 @@ public class Functionalities {
 
     /**
      * Metodo para retirar dinero
-     * 
      * @param newBalance
      */
-    public void retreats(double newBalance) {
-        if (verify() == true) {
+    public void retreats(double newBalance){
+        if (verify() == true){
             List<Account> accounts = bDmanager.readAccounts();
             for (Account account : accounts) {
                 if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
-                    double finalBalance = account.getBalance() - newBalance;
+                    double finalBalance = account.getBalance()-newBalance;
                     bDmanager.editAccount(numberAccount, finalBalance);
                     System.out.println("Su nuevo saldo es: " + account.getBalance());
                 }
@@ -66,15 +64,14 @@ public class Functionalities {
 
     /**
      * Metodo para consignar dinero
-     * 
      * @param newBalance
      */
-    public void consiganations(double newBalance) {
-        if (verify() == true) {
+    public void consiganations(double newBalance){
+        if (verify() == true){
             List<Account> accounts = bDmanager.readAccounts();
             for (Account account : accounts) {
                 if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
-                    double finalBalance = account.getBalance() + newBalance;
+                    double finalBalance = account.getBalance()+newBalance;
                     bDmanager.editAccount(numberAccount, finalBalance);
                     System.out.println("Su nuevo saldo es: " + account.getBalance());
                 }
@@ -84,7 +81,6 @@ public class Functionalities {
 
     /**
      * Metodo para calcular el avance
-     * 
      * @param balance
      * @return
      */
@@ -98,7 +94,6 @@ public class Functionalities {
 
     /**
      * Metodo para calcular el reembolso
-     * 
      * @param advance
      * @return
      */
@@ -107,26 +102,16 @@ public class Functionalities {
         return auxRefund = advance * 0.08 * 1.5;
     }
 
-/**
+    /**
      * Metodo para calcular el avance
-     * 
      * @param balance
+     * @param advance
      */
-    public void advance(double balance) {
+    public void advance(double balance, double advance) {
         double maxAdvance = balance * 1.5;
         double auxAdvance = calculateAdvance(balance);
-        if (verify() == true) {
-            List<Account> accounts = bDmanager.readAccounts();
-            for (Account account : accounts) {
-                if (account.getNumberAccount() == this.numberAccount && account.getPassword() == this.password) {
-                    if (balance > 0 && auxAdvance < balance && auxAdvance <= maxAdvance) {
-                        double finalBalance = account.getBalance() + auxAdvance;
-                        bDmanager.editAccount(numberAccount, finalBalance);
-                        System.out.println("Su nuevo saldo es: " + account.getBalance());
-                    }
-                
-            }
-        }
+        if (balance > 0 && auxAdvance < balance && auxAdvance <= maxAdvance) {
+            double aux = account.getBalance() + auxAdvance;
+        }
     }
-}
 }
